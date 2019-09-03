@@ -2,8 +2,11 @@
     padding: 0;
     margin: 0;
 }
+body{
+    background-color: rgba(146, 93, 50, 0.445);
+}
 .main {
-    background-image: url("/UI/assets/bgimg.jpg");
+    background-image: url("../Assets/christian-weiss-V97vyTEnSnU-unsplash.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -36,9 +39,11 @@
 }
 .nav .links .link a {
     text-decoration: none;
-    color: rgba(1, 1, 12, 0.918);
+    color: orange;
+    /* color: rgba(1, 1, 12, 0.918); */
     /* font-size: 1.5em; */
-    font: 22px "noto-sans",Helvetica,Arial,sans-serif;
+    font: 17px "noto-sans",Helvetica,Arial,sans-serif;
+    font-weight: 700;
 }
 .nav .links .link a:hover {
     transition: 3s;
@@ -46,7 +51,7 @@
 }
 .note {
     text-align: center;
-    background-color: rgba(80,130,252,0.4);
+    background-color: rgba(61, 57, 21, 0.4);
     width: 48%;
     padding: 30px;
     /* margin-top: -140px; */
@@ -57,13 +62,14 @@
     /* margin-bottom: 50px; */
 }
 .note h1{
-    color: rgba(29, 29, 167, 0.918);
+    color: #FFF;
+    /* color: rgba(29, 29, 167, 0.918); */
     /* color: rgba(15, 15, 15, 0.918); */
     font-family: 'Dancing Script', cursive;
     /* font-family: "noto-sans",Helvetica,Arial,sans-serif; */
 }
 .note p {
-    color: black;
+    color: rgb(32, 22, 3);
     font-family: "noto-sans",Helvetica,Arial,sans-serif;
 }
 .middle {
@@ -76,7 +82,7 @@
     top: 10px;
     bottom: 0px;
     box-shadow: 3px 4px 4px gray;
-    background-color: rgb(224, 227, 235);
+    background-color: rgb(245, 243, 236);
     font-size: 1.5em;
     /* flex: 1 1 100px; */
 }
@@ -105,7 +111,8 @@
     font: 1em "noto-sans",Helvetica,Arial,sans-serif;
     width:100vw;
     flex-wrap: wrap;
-    background-color: lightblue;
+    background-color: rgb(83, 76, 53);
+    color: #FFF;
 }
 .under h3 {
     padding-bottom: 10px;
@@ -127,18 +134,27 @@
 } */
 .underleft div{
     padding: 10px;
-    max-width: 180px;
+    max-width: 250px;
     text-align: justify;
+}
+.comrev{
+    color: rgb(180, 119, 6);
+}
+.undermid{
+    color: rgb(180, 119, 6);
+}
+.notif{
+    color: rgb(180, 119, 6); 
 }
 .underright div {
     padding: 10px;
-    max-width: 180px;
+    max-width: 250px;
     text-align: justify;
 }
 .footer {
     width: 100vw;
     text-align: center;
-    background-color: rgba(18, 18, 19, 0.918);
+    background-color: rgb(51, 51, 36);
 }
 .footer .contacts {
     font-size: 1.3em;
@@ -167,21 +183,22 @@
     font: 12px "noto-sans",Helvetica,Arial,sans-serif;
 }
 .allpage {
-    background-image: url("/UI/assets/bgimg.jpg");
+    background-image: url("../Assets/christian-weiss-V97vyTEnSnU-unsplash.jpg               ");
     background-attachment: fixed;
     background-size: cover;
-    background-position: bottom;
+    /* background-position: bottom; */
     width: 100vw;
     height: auto;
 }
 .form {
-    background-color: rgba(80,130,252,0.4);
+    background-color: rgba(82, 68, 30, 0.4);
     width: 50vw;
     /* margin: 10px; */
     height: auto;
+    color: #FFF;
     padding: 10px;
     justify-content: center;
-    margin: auto;
+    margin: 0px auto;
     text-align: center;
     /* top: 50%;
     left: 50%;
@@ -205,24 +222,35 @@
 }
 .form .other button {
     padding: 10px;
-    width: 150px;
+    width: 15%;
+    font-weight: 700;
+    color: aliceblue;
+    font-size: 17px;
     background-color:rgb(255, 166, 24);
+}
+.form .other button:hover{
+background: rgb(207, 100, 12);
+color:rgb(234, 243, 234);
 }
 .form p {
     font: 16px "noto-sans",Helvetica,Arial,sans-serif;
 }
 .form p a {
     text-decoration: none;
+    color: green;
+    font-weight: 700;
+    font-size: 1.1em;
 }
 .form p a:hover {
     color: #FFF;
 }
+
 .tabcont {
     display: flex;
 }
 .tabs {
     /* background-color: rgba(1, 1, 12, 0.918); */
-    background-color: rgba(29, 29, 167, 0.918);
+    background-color: rgba(220, 220, 228, 0.918);
     width: 20vw;
     height: 82vh;
     list-style-type: none;
@@ -238,10 +266,10 @@
     text-decoration: none;
     /* font: 1.2em "noto-sans",Helvetica,Arial,sans-serif; */
     font: 1.2em 'EB Garamond', serif;
-    color: rgb(255, 166, 24);
+    color: rgb(144, 94, 13);
 }
 .tabs li a:hover {
-    color: wheat;
+    color: rgb(16, 78, 5);
 }
 .jcover {
     width: 30vw;
@@ -319,6 +347,12 @@
 .jentry button {
     padding: 10px 20px;
     background-color: rgb(255, 166, 24);
+    color: #FFF;
+    font-weight: 600;
+}
+.jentry button:hover{
+    background: rgb(207, 100, 12);
+color:rgb(234, 243, 234);
 }
 .palette {
     width: 40px;
