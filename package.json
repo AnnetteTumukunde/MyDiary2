@@ -1,0 +1,30 @@
+{
+  "name": "mydiary2",
+  "version": "1.0.0",
+  "description": "This package is for the backend of the online journal called Re_View MyDiary.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnnetteTumukunde/MyDiary2.git"
+  },
+  "author": "Annette Tumukunde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnnetteTumukunde/MyDiary2/issues"
+  },
+  "homepage": "https://github.com/AnnetteTumukunde/MyDiary2#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
+    "nodemon": "^1.19.2"
+  }
+}
