@@ -32,9 +32,14 @@ const addentry = (request, response) => {
         entry_date: "On "+nentry.entry_date+", 2019",
         entry_content: request.body.entry_content
     };
+    if(nentry && nentrycontent ){
     const newAllEntries = models[0].allentries.push(nentry);
     const nentrycont = models[1].specificEntry.push(nentrycontent);
     response.status(201).json({addedentry : nentry,newentries : newAllEntries,newentry : nentrycontent,newentries : nentrycont});
+    }
+    else{
+        response.status(404).json({message: "Please enter correct information", status: 404});
+    }
 };
 
 const modifyentry = (request, response) => {
@@ -66,5 +71,21 @@ const modifyentry = (request, response) => {
     }
 };
 
-module.exports = [retrieveAllEntries,retrieveSpecificEntry,addentry,modifyentry];
+const entrydelete = (request, response) => {
+    let seen = models[0].allentries.find((sentry) => {
+        return sentry.entry_title === request.params.entry_title;
+    });
+    if (seen) {
+        const changes = models[0].allentries.indexOf(seen);
+        const newentries = models[0].allentries.splice(changes,1);
+        const entrydel = models[1].specificEntry.indexOf(seen);
+        const delentry = models[1].specificEntry.splice(entrydel,1);
+        response.status(204).json({message: "Entry deleted", newenntries: newentries, deletedentry: delentry});
+    }
+    else {
+        response.status(404).json({message: "Entry not found", status: 404});
+    }
+};
+
+export default [retrieveAllEntries,retrieveSpecificEntry,addentry,modifyentry,entrydelete];
 
