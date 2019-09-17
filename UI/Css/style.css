@@ -1,0 +1,392 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: rgba(146, 93, 50, 0.445);
+}
+.main {
+    background-image: url("../Assets/christian-weiss-V97vyTEnSnU-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 60vh;
+}
+.logo {
+    margin-top: -20px;
+    /* height: 80px; */
+}
+.nav {
+    display: flex;
+    height: 18vh;
+}
+.nav .links {
+    display: flex;
+    justify-content: right;
+    flex-wrap: wrap;
+    /* padding: 10px; */
+    margin-right: 20px;
+    margin-left: auto;
+}
+.nav .links .link {
+    list-style-type: none;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+}
+.nav .links .link a {
+    text-decoration: none;
+    color: orange;
+    /* color: rgba(1, 1, 12, 0.918); */
+    /* font-size: 1.5em; */
+    font: 17px "noto-sans",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+.nav .links .link a:hover {
+    transition: 3s;
+    color: rgba(140,138,88);
+}
+.note {
+    text-align: center;
+    background-color: rgba(61, 57, 21, 0.4);
+    width: 48%;
+    padding: 30px;
+    /* margin-top: -140px; */
+    margin: -140px auto 0px auto;
+    font-size: 1.5em;
+    justify-content: center;
+    box-shadow: 3px 4px 4px gray;
+    /* margin-bottom: 50px; */
+}
+.note h1{
+    color: #FFF;
+    /* color: rgba(29, 29, 167, 0.918); */
+    /* color: rgba(15, 15, 15, 0.918); */
+    font-family: 'Dancing Script', cursive;
+    /* font-family: "noto-sans",Helvetica,Arial,sans-serif; */
+}
+.note p {
+    color: rgb(32, 22, 3);
+    font-family: "noto-sans",Helvetica,Arial,sans-serif;
+}
+.middle {
+    padding: 20px;
+    max-width: 80vw;
+    align-content: center;
+    margin: 30px auto;
+    height: auto;
+    width: auto;
+    top: 10px;
+    bottom: 0px;
+    box-shadow: 3px 4px 4px gray;
+    background-color: rgb(245, 243, 236);
+    font-size: 1.5em;
+    /* flex: 1 1 100px; */
+}
+.middle p {
+    text-align: justify;
+    padding: 60px 10px;
+}
+.middles {
+    display: flex;
+    padding: 20px;
+    font: 22px "noto-sans",Helvetica,Arial,sans-serif;
+}
+.left img {
+    width: 30vw;
+    box-shadow: 2px 3px 3px grey;
+    /* height: 40vh; */
+}
+.right img {
+    width: 30vw;
+    box-shadow: 2px 3px 3px grey;
+}
+.under {
+    justify-content: center;
+    display: flex;
+    /* padding: 10px; */
+    font: 1em "noto-sans",Helvetica,Arial,sans-serif;
+    width:100vw;
+    flex-wrap: wrap;
+    background-color: rgb(83, 76, 53);
+    color: #FFF;
+}
+.under h3 {
+    padding-bottom: 10px;
+}
+.underleft {
+    justify-content: flex-start;
+    padding: 85px;
+}
+.underright {
+    justify-content: flex-end;
+    padding: 85px;
+}
+.undermid {
+    justify-content: center;
+    padding: 85px;
+}
+/* .undermid img {
+    width: 200px;
+} */
+.underleft div{
+    padding: 10px;
+    max-width: 250px;
+    text-align: justify;
+}
+.comrev{
+    color: rgb(180, 119, 6);
+}
+.undermid{
+    color: rgb(180, 119, 6);
+}
+.notif{
+    color: rgb(180, 119, 6); 
+}
+.underright div {
+    padding: 10px;
+    max-width: 250px;
+    text-align: justify;
+}
+.footer {
+    width: 100vw;
+    text-align: center;
+    background-color: rgb(51, 51, 36);
+}
+.footer .contacts {
+    font-size: 1.3em;
+    padding-top: 30px;
+    font-family: "noto-sans",Helvetica,Arial,sans-serif;
+    color: #FFF;
+}
+.footer .sm {
+    display: flex;
+    flex: 1 1 200px;
+    justify-content: center;
+    padding: 20px;
+}
+.footer .sm a {
+    padding: 20px;
+    text-decoration: none;
+    color: #FFF;
+}
+.footer .sm a:hover {
+    color: wheat;
+    transition: 3s;
+}
+.footer p {
+    color: rgb(224, 227, 235);
+    padding-bottom: 20px;
+    font: 12px "noto-sans",Helvetica,Arial,sans-serif;
+}
+.allpage {
+    background-image: url("../Assets/christian-weiss-V97vyTEnSnU-unsplash.jpg               ");
+    background-attachment: fixed;
+    background-size: cover;
+    /* background-position: bottom; */
+    width: 100vw;
+    height: auto;
+}
+.form {
+    background-color: rgba(82, 68, 30, 0.4);
+    width: 50vw;
+    /* margin: 10px; */
+    height: auto;
+    color: #FFF;
+    padding: 10px;
+    justify-content: center;
+    margin: 0px auto;
+    text-align: center;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute; */
+    box-shadow: 3px 4px 4px gray;
+}
+.form .heading {
+    padding: 20px;
+}
+.form .cont {
+    padding: 20px;
+}
+.form .other {
+    padding: 20px;
+    font: 22px "noto-sans",Helvetica,Arial,sans-serif;
+}
+.form .other input {
+    width: 150px;
+    height: 30px;
+}
+.form .other button {
+    padding: 10px;
+    /* width: 15%; */
+    font-weight: 700;
+    color: aliceblue;
+    font-size: 17px;
+    background-color:rgb(255, 166, 24);
+}
+.form .other button:hover{
+background: rgb(207, 100, 12);
+color:rgb(234, 243, 234);
+}
+.form p {
+    font: 16px "noto-sans",Helvetica,Arial,sans-serif;
+}
+.form p a {
+    text-decoration: none;
+    color: green;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+.form p a:hover {
+    color: #FFF;
+}
+
+.tabcont {
+    display: flex;
+}
+.tabs {
+    /* background-color: rgba(1, 1, 12, 0.918); */
+    background-color: rgba(220, 220, 228, 0.918);
+    width: 20vw;
+    height: 82vh;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+.tabs li {
+    padding: 20px;
+    /* flex: 1 1 50px;
+    flex-wrap: wrap; */
+}
+.tabs li a {
+    text-decoration: none;
+    /* font: 1.2em "noto-sans",Helvetica,Arial,sans-serif; */
+    font: 1.2em 'EB Garamond', serif;
+    color: rgb(144, 94, 13);
+}
+.tabs li a:hover {
+    color: rgb(16, 78, 5);
+}
+.jcover {
+    width: 30vw;
+    margin: 30px auto;
+    height: 70vh;
+    background-color: gray;
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+    border-radius: 10px;
+}
+.jcover h1 {
+    text-align: center;
+    margin-top: 100px;
+}
+.colorch {
+    background-color: rgb(224, 227, 235);
+    width: 31vw;
+    height: 70vh;
+    display: flex;
+    /* flex: 1 0 200px; */
+    flex-wrap: wrap;
+}
+.colorch h3 {
+    text-align: center;
+    margin: 3px auto;
+}
+.color {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
+.blue {
+    background-color: blue;
+}
+.black {
+    background-color: black;
+    color: #FFF;
+}
+.green {
+    background-color: green;
+}
+.brown {
+    background-color: brown;
+}
+.violet {
+    background-color: violet;
+}
+.orange {
+    background-color: orange;
+}
+/* .yellow {
+    background-color: yellow;
+} */
+.burlywood {
+    background-color: burlywood;
+}
+.chocolate {
+    background-color: chocolate;
+}
+.darkolivegreen {
+    background-color: darkolivegreen;
+}
+.jentry {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 5px 0px 10px;
+}
+.jentry textarea{
+    width: 70vw;
+    height: auto;
+}
+.jentry .btns {
+    margin: 10px 0px 10px auto;
+}
+.jentry button {
+    padding: 10px 20px;
+    background-color: rgb(255, 166, 24);
+    color: #FFF;
+    font-weight: 600;
+}
+.jentry button:hover{
+    background: rgb(207, 100, 12);
+color:rgb(234, 243, 234);
+}
+.palette {
+    width: 40px;
+    height: 66vh;
+    margin: 5px 10px 0px 3px;
+    background-color: rgb(224, 227, 235);
+}
+.fa {
+    text-decoration: none;
+    padding: 10px;
+}
+#bltitle {
+    font-size: 1.8em;
+}
+#blentry {
+    font-size: 1.2em;
+    padding: 10px 0px;
+}
+.jcovti {
+    font-size: 1.3em;
+    width: 70%;
+    border-radius: 5px;
+}
+.entries {
+    display: flex;
+    margin: 20px;
+    text-align: justify;
+}
+.entry {
+    background-color: #FFF;
+    padding: 30px;
+    margin: 0px 10px;
+    /* flex-wrap: wrap; */
+}
+#date {
+    padding: 3px 3px 3px 160px;
+}
