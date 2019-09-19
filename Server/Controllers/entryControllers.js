@@ -73,7 +73,7 @@ const modifyentry = (request, response) => {
 
 const entrydelete = (request, response) => {
     let seen = models[0].allentries.find((sentry) => {
-        return sentry.id === request.params.id;
+        return sentry.entry_title === request.params.entry_title;
     });
     if (seen) {
         const changes = models[0].allentries.indexOf(seen);
