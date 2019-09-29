@@ -4,8 +4,11 @@
   "description": "This package is for the backend of the online journal called Re_View MyDiary.",
   "main": "index.js",
   "scripts": {
+    "checks": "mocha --require @babel/register ./Server/tests/logicTest || true ",
     "start": "nodemon --exec babel-node ./Server/index.js",
-    "build": "babel Server -d build"
+    "build": "babel Server -d build",
+    "clean": "rm -rf build",
+    "lint": "eslint ./Server || true"
   },
   "repository": {
     "type": "git",
@@ -21,17 +24,19 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
     "@babel/node": "^7.6.1",
     "@babel/preset-env": "^7.6.0",
-    "@typescript-eslint/eslint-plugin": "^2.3.0",
-    "@typescript-eslint/parser": "^2.3.0",
+    "@babel/register": "^7.6.0",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.0"
   }
 }

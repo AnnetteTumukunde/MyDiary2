@@ -1,18 +1,18 @@
 import models from '../Models/data';
 
 const retrieveAllEntries = (request, response) => {
-    response.status(200).json(models[0].allentries);
+    response.status(200).json({ data: models[0].allentries });
 };
 
 const retrieveSpecificEntry = (request, response) => {
-    let seen = models[1].specificEntry.find((sentry) => {
+    const seen = models[1].specificEntry.find((sentry) => {
         return sentry.entry_title === request.params.entry_title;
     });
     if (seen) {
         response.status(200).json(seen);
     }
     else {
-        response.status(404).json({message: "Entry not found", status: 404});
+        response.status(404).json({ message: 'Entry not found', status: 404 });
     }
 };
 
@@ -24,26 +24,26 @@ const addentry = (request, response) => {
         entry_title: request.body.entry_title,
         entry_date: request.body.entry_date,
         posted: request.body.posted,
-        viewed: request.body.viewed
+        viewed: request.body.viewed,
     };
     const nentrycontent = {
         id: nentryId,
         entry_title: nentry.entry_title,
-        entry_date: "On "+nentry.entry_date+", 2019",
-        entry_content: request.body.entry_content
+        entry_date: "On " + nentry.entry_date + ", 2019",
+        entry_content: request.body.entry_content,
     };
-    if(nentry && nentrycontent ){
+    if (nentry && nentrycontent) {
     const newAllEntries = models[0].allentries.push(nentry);
     const nentrycont = models[1].specificEntry.push(nentrycontent);
-    response.status(201).json({addedentry : nentry,newentries : newAllEntries,newentry : nentrycontent,newentries : nentrycont});
+    response.status(201).json({ addedentry: nentry, newentries: newAllEntries, newentry: nentrycontent, newentr: nentrycont });
     }
-    else{
-        response.status(404).json({message: "Please enter correct information", status: 404});
+    else {
+        response.status(404).json({ message: 'Please enter correct information', status: 404 });
     }
 };
 
 const modifyentry = (request, response) => {
-    let seen = models[0].allentries.find((sentry) => {
+    const seen = models[0].allentries.find((sentry) => {
         return sentry.entry_title === request.params.entry_title;
     });
     if (seen) {
@@ -57,22 +57,22 @@ const modifyentry = (request, response) => {
         const editedentrycont = {
             id: seen.id,
             entry_title: editedentries.entry_title,
-            entry_date: "On "+editedentries.entry_date+", 2019",
+            entry_date: "On " + editedentries.entry_date + ", 2019",
             entry_content: request.body.entry_content
         };
         const changes = models[0].allentries.indexOf(seen);
         const nentries = models[0].allentries.splice(changes,1,editedentries);
         const entrychanges = models[1].specificEntry.indexOf(seen);
         const updatedentry = models[1].specificEntry.splice(entrychanges,1,editedentrycont);
-        response.status(204).json({oldentries : seen,updatedentries : nentries,updatedentrycontent : updatedentry});
+        response.status(200).json({ message: 'Entry successfully modified', status: 200, nentries, updatedentry });
     }
     else {
-        response.status(404).json({message: "Entry not found", status: 404});
+        response.status(404).json({ message: 'Entry not found', status: 404 });
     }
 };
 
 const entrydelete = (request, response) => {
-    let seen = models[0].allentries.find((sentry) => {
+    const seen = models[0].allentries.find((sentry) => {
         return sentry.entry_title === request.params.entry_title;
     });
     if (seen) {
@@ -80,12 +80,11 @@ const entrydelete = (request, response) => {
         const newentries = models[0].allentries.splice(changes,1);
         const entrydel = models[1].specificEntry.indexOf(seen);
         const delentry = models[1].specificEntry.splice(entrydel,1);
-        response.status(204).json({message: "Entry deleted", newenntries: newentries, deletedentry: delentry});
+        response.status(200).json({message: 'Entry deleted', newenntries: newentries, deletedentry: delentry});
     }
     else {
-        response.status(404).json({message: "Entry not found", status: 404});
+        response.status(404).json({message: 'Entry not found', status: 404});
     }
 };
 
 export default [retrieveAllEntries,retrieveSpecificEntry,addentry,modifyentry,entrydelete];
-
