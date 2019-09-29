@@ -10,14 +10,31 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
-    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
     "rules": {
+        "linebreak-style": "off",
+        "indent": "off",
+        "block-spacing": "off",
+        "no-irregular-whitespace": 0,
+        "no-console": 0,
+        "no-empty": 0,
+        "no-trailing-spaces": "off",
+        "comma-spacing": "off",
+        "object-curly-spacing": "off",
+        "object-curly-newline": "off",
+        "comma-dangle": "off",
+        "key-spacing": "off",
+        "quotes": "off",
+        "arrow-body-style": "off",
+        "space-infix-ops": "off",
+        "brace-style": "off",
+        "max-len": "off",
+        "arrow-parens": "off",
+        "prefer-spread": "off",
+        "prefer-template": "off",
+        "no-undef": "off"        
     }
 }
