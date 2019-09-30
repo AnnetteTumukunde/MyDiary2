@@ -15,8 +15,7 @@ body{
 }
 .logo {
     margin-top: -20px;
-    /* height: 80px; */
-}
+ }
 .nav {
     display: flex;
     height: 18vh;
@@ -25,7 +24,6 @@ body{
     display: flex;
     justify-content: right;
     flex-wrap: wrap;
-    /* padding: 10px; */
     margin-right: 20px;
     margin-left: auto;
 }
@@ -40,8 +38,6 @@ body{
 .nav .links .link a {
     text-decoration: none;
     color: orange;
-    /* color: rgba(1, 1, 12, 0.918); */
-    /* font-size: 1.5em; */
     font: 17px "noto-sans",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
@@ -54,19 +50,14 @@ body{
     background-color: rgba(61, 57, 21, 0.4);
     width: 48%;
     padding: 30px;
-    /* margin-top: -140px; */
     margin: -140px auto 0px auto;
     font-size: 1.5em;
     justify-content: center;
     box-shadow: 3px 4px 4px gray;
-    /* margin-bottom: 50px; */
 }
 .note h1{
     color: #FFF;
-    /* color: rgba(29, 29, 167, 0.918); */
-    /* color: rgba(15, 15, 15, 0.918); */
     font-family: 'Dancing Script', cursive;
-    /* font-family: "noto-sans",Helvetica,Arial,sans-serif; */
 }
 .note p {
     color: rgb(32, 22, 3);
@@ -84,7 +75,6 @@ body{
     box-shadow: 3px 4px 4px gray;
     background-color: rgb(245, 243, 236);
     font-size: 1.5em;
-    /* flex: 1 1 100px; */
 }
 .middle p {
     text-align: justify;
@@ -98,7 +88,6 @@ body{
 .left img {
     width: 30vw;
     box-shadow: 2px 3px 3px grey;
-    /* height: 40vh; */
 }
 .right img {
     width: 30vw;
@@ -107,7 +96,6 @@ body{
 .under {
     justify-content: center;
     display: flex;
-    /* padding: 10px; */
     font: 1em "noto-sans",Helvetica,Arial,sans-serif;
     width:100vw;
     flex-wrap: wrap;
@@ -129,9 +117,6 @@ body{
     justify-content: center;
     padding: 85px;
 }
-/* .undermid img {
-    width: 200px;
-} */
 .underleft div{
     padding: 10px;
     max-width: 250px;
@@ -183,27 +168,21 @@ body{
     font: 12px "noto-sans",Helvetica,Arial,sans-serif;
 }
 .allpage {
-    background-image: url("../Assets/christian-weiss-V97vyTEnSnU-unsplash.jpg               ");
+    background-image: url("../Assets/christian-weiss-V97vyTEnSnU-unsplash.jpg");
     background-attachment: fixed;
     background-size: cover;
-    /* background-position: bottom; */
     width: 100vw;
     height: auto;
 }
 .form {
     background-color: rgba(82, 68, 30, 0.4);
     width: 50vw;
-    /* margin: 10px; */
     height: auto;
     color: #FFF;
     padding: 10px;
     justify-content: center;
     margin: 0px auto;
     text-align: center;
-    /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute; */
     box-shadow: 3px 4px 4px gray;
 }
 .form .heading {
@@ -218,11 +197,14 @@ body{
 }
 .form .other input {
     width: 150px;
-    height: 30px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
 }
 .form .other button {
     padding: 10px;
-    /* width: 15%; */
+    border-radius: 5px;
+    border: none;
     font-weight: 700;
     color: aliceblue;
     font-size: 17px;
@@ -249,7 +231,6 @@ color:rgb(234, 243, 234);
     display: flex;
 }
 .tabs {
-    /* background-color: rgba(1, 1, 12, 0.918); */
     background-color: rgba(220, 220, 228, 0.918);
     width: 20vw;
     height: 82vh;
@@ -259,12 +240,9 @@ color:rgb(234, 243, 234);
 }
 .tabs li {
     padding: 20px;
-    /* flex: 1 1 50px;
-    flex-wrap: wrap; */
 }
 .tabs li a {
     text-decoration: none;
-    /* font: 1.2em "noto-sans",Helvetica,Arial,sans-serif; */
     font: 1.2em 'EB Garamond', serif;
     color: rgb(144, 94, 13);
 }
@@ -284,12 +262,15 @@ color:rgb(234, 243, 234);
     text-align: center;
     margin-top: 100px;
 }
+.jcover h3 {
+    text-align: center;
+    margin: 10px auto;
+}
 .colorch {
     background-color: rgb(224, 227, 235);
     width: 31vw;
     height: 70vh;
     display: flex;
-    /* flex: 1 0 200px; */
     flex-wrap: wrap;
 }
 .colorch h3 {
@@ -320,9 +301,6 @@ color:rgb(234, 243, 234);
 .orange {
     background-color: orange;
 }
-/* .yellow {
-    background-color: yellow;
-} */
 .burlywood {
     background-color: burlywood;
 }
@@ -337,6 +315,11 @@ color:rgb(234, 243, 234);
     flex-direction: column;
     margin: 0px 5px 0px 10px;
 }
+.jentry p {
+    font-weight: 400;
+    background-color: #FFF;
+    padding: 10px 20px;
+}
 .jentry textarea{
     width: 70vw;
     height: auto;
@@ -349,10 +332,12 @@ color:rgb(234, 243, 234);
     background-color: rgb(255, 166, 24);
     color: #FFF;
     font-weight: 600;
+    border: none;
+    border-radius: 5px;
 }
 .jentry button:hover{
     background: rgb(207, 100, 12);
-color:rgb(234, 243, 234);
+    color:rgb(234, 243, 234);
 }
 .palette {
     width: 40px;
@@ -376,6 +361,12 @@ color:rgb(234, 243, 234);
     width: 70%;
     border-radius: 5px;
 }
+.jcovdes {
+    font-size: .9em;
+    width: 70%;
+    border-radius: 3px;
+    padding: 10px 5px;
+}
 .entries {
     display: flex;
     margin: 20px;
@@ -385,7 +376,10 @@ color:rgb(234, 243, 234);
     background-color: #FFF;
     padding: 30px;
     margin: 0px 10px;
-    /* flex-wrap: wrap; */
+}
+.fa-edit {
+    padding: 0px 0px 0px 130px;
+    color: black;
 }
 #date {
     padding: 3px 3px 3px 160px;
