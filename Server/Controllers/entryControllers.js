@@ -1,3 +1,4 @@
+import moment from 'moment';
 import models from '../Models/data';
 
 const retrieveAllEntries = (request, response) => {
@@ -6,7 +7,7 @@ const retrieveAllEntries = (request, response) => {
 
 const retrieveSpecificEntry = (request, response) => {
     const seen = models[1].specificEntry.find((sentry) => {
-        return sentry.entry_title === request.params.entry_title;
+        return sentry.id === parseInt(request.params.id);
     });
     if (seen) {
         response.status(200).json(seen);
@@ -21,16 +22,16 @@ const addentry = (request, response) => {
     const nentryId = aentryIds.length > 0 ? Math.max.apply(Math, aentryIds) + 1 : 1;
     const nentry = {
         id: nentryId,
-        entry_title: request.body.entry_title,
-        entry_date: request.body.entry_date,
+        entryTitle: request.body.entryTitle,
+        entryDate: moment().format('ll'),
         posted: request.body.posted,
         viewed: request.body.viewed,
     };
     const nentrycontent = {
         id: nentryId,
-        entry_title: nentry.entry_title,
-        entry_date: "On " + nentry.entry_date + ", 2019",
-        entry_content: request.body.entry_content,
+        entryTitle: nentry.entryTitle,
+        entryDate: "On " + moment().format('ll'),
+        entryContent: request.body.entryContent,
     };
     if (nentry && nentrycontent) {
     const newAllEntries = models[0].allentries.push(nentry);
@@ -44,21 +45,21 @@ const addentry = (request, response) => {
 
 const modifyentry = (request, response) => {
     const seen = models[0].allentries.find((sentry) => {
-        return sentry.entry_title === request.params.entry_title;
+        return sentry.id === parseInt(request.params.id);
     });
     if (seen) {
         const editedentries = {
             id: seen.id,
-            entry_title: request.body.entry_title,
-            entry_date: request.body.entry_date,
+            entryTitle: request.body.entryTitle,
+            entryDate: seen.entryDate,
             posted: request.body.posted,
             viewed: request.body.viewed 
         };
         const editedentrycont = {
             id: seen.id,
-            entry_title: editedentries.entry_title,
-            entry_date: "On " + editedentries.entry_date + ", 2019",
-            entry_content: request.body.entry_content
+            entryTitle: editedentries.entryTitle,
+            entryDate: "On " + editedentries.entryDate + ", 2019",
+            entryContent: request.body.entryContent
         };
         const changes = models[0].allentries.indexOf(seen);
         const nentries = models[0].allentries.splice(changes,1,editedentries);
@@ -73,7 +74,7 @@ const modifyentry = (request, response) => {
 
 const entrydelete = (request, response) => {
     const seen = models[0].allentries.find((sentry) => {
-        return sentry.entry_title === request.params.entry_title;
+        return sentry.id === parseInt(request.params.id);
     });
     if (seen) {
         const changes = models[0].allentries.indexOf(seen);
@@ -87,4 +88,4 @@ const entrydelete = (request, response) => {
     }
 };
 
-export default [retrieveAllEntries,retrieveSpecificEntry,addentry,modifyentry,entrydelete];
+export default { retrieveAllEntries, retrieveSpecificEntry, addentry, modifyentry, entrydelete };

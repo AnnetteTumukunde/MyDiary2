@@ -1,5 +1,6 @@
 import chai, { expect } from 'chai';
 import chaiHTTP from 'chai-http';
+import moment from 'moment';
 import app from '../index';
 
 chai.use(chaiHTTP);
@@ -44,7 +45,7 @@ describe('Controller API tests', () => {
             it('Checks the specific entry that does not exist', finish => {
                 chai 
                     .request(app)
-                    .get('/api/v1/entries/:entry_title')
+                    .get('/api/v1/entries/:id')
                     .end((error, response) => {
                         expect(response.status).to.equals(404);
                         expect(response.body.message).to.equals('Entry not found');
@@ -61,11 +62,11 @@ describe('Controller API tests', () => {
                 .post('/api/v1/newentry')
                 .send({
                     id: 1,
-                    entry_title: "something",
-                    entry_date: "Sep 10",
+                    entryTitle: "something",
+                    entryDate: moment().format('ll'),
                     posted: false,
                     viewed: false,
-                    entry_content: "Just write about anything"
+                    entryContent: "Just write about anything"
                 })
                 .end((error, response) => {
                     expect(response.status).to.equals(201);
@@ -75,11 +76,11 @@ describe('Controller API tests', () => {
                     expect(response.body.newentry).to.be.an('object');
                     expect(response.body.newentr).to.be.an('number');
                     expect(response.body.addedentry.id).to.be.a('number');
-                    expect(response.body.addedentry.entry_title).to.be.a('string');
-                    expect(response.body.addedentry.entry_date).to.be.a('string');
+                    expect(response.body.addedentry.entryTitle).to.be.a('string');
+                    expect(response.body.addedentry.entryDate).to.be.a('string');
                     expect(response.body.addedentry.posted).to.be.a('boolean');
                     expect(response.body.addedentry.viewed).to.be.a('boolean');
-                    expect(response.body.newentry.entry_content).to.be.a('string');
+                    expect(response.body.newentry.entryContent).to.be.a('string');
                     finish();
                 });
         });
@@ -99,7 +100,7 @@ describe('Controller API tests', () => {
         it('Test if the entry to modify does not exist', finish => {
             chai
                 .request(app)
-                .put('/api/v1/entries/:entry_title')
+                .put('/api/v1/entries/:id')
                 .end((error, response) => {
                     expect(response.status).to.equals(404);
                     expect(response.body).to.be.an('object');
@@ -123,7 +124,7 @@ describe('Controller API tests', () => {
         it('Test if the entry to delete does not exist', finish => {
             chai
                 .request(app)
-                .delete('/api/v1/entries/:entry_title')
+                .delete('/api/v1/entries/:id')
                 .end((error, response) => {
                     expect(response.status).to.equals(404);
                     expect(response.body).to.be.an('object');
