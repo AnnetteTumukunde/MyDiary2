@@ -45,7 +45,7 @@ describe('Controller API tests', () => {
             it('Checks the specific entry that does not exist', finish => {
                 chai 
                     .request(app)
-                    .get('/api/v1/entries/:entry_title')
+                    .get('/api/v1/entries/:id')
                     .end((error, response) => {
                         expect(response.status).to.equals(404);
                         expect(response.body.message).to.equals('Entry not found');
@@ -100,7 +100,7 @@ describe('Controller API tests', () => {
         it('Test if the entry to modify does not exist', finish => {
             chai
                 .request(app)
-                .put('/api/v1/entries/:entry_title')
+                .put('/api/v1/entries/:id')
                 .end((error, response) => {
                     expect(response.status).to.equals(404);
                     expect(response.body).to.be.an('object');
@@ -124,7 +124,7 @@ describe('Controller API tests', () => {
         it('Test if the entry to delete does not exist', finish => {
             chai
                 .request(app)
-                .delete('/api/v1/entries/:entry_title')
+                .delete('/api/v1/entries/:id')
                 .end((error, response) => {
                     expect(response.status).to.equals(404);
                     expect(response.body).to.be.an('object');

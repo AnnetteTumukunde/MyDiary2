@@ -4,7 +4,7 @@
   "description": "This package is for the backend of the online journal called Re_View MyDiary.",
   "main": "index.js",
   "scripts": {
-    "checks": "cd Server &&  nyc --reporter=html --reporter=text mocha --require @babel/register Tests/* --exit ",
+    "test": "cd Server && nyc --reporter=html --reporter=text mocha --require @babel/register Tests/* --exit ",
     "start": "nodemon --exec babel-node ./Server/index.js",
     "build": "babel Server -d build",
     "clean": "rm -rf build",
