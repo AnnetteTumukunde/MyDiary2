@@ -4,11 +4,12 @@
   "description": "This package is for the backend of the online journal called Re_View MyDiary.",
   "main": "index.js",
   "scripts": {
-    "checks": "mocha --require @babel/register ./Server/tests/logicTest || true ",
+    "checks": "cd Server &&  nyc --reporter=html --reporter=text mocha --require @babel/register Tests/* --exit ",
     "start": "nodemon --exec babel-node ./Server/index.js",
     "build": "babel Server -d build",
     "clean": "rm -rf build",
-    "lint": "eslint ./Server || true"
+    "lint": "eslint ./Server || true",
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls || true"
   },
   "repository": {
     "type": "git",
@@ -22,11 +23,13 @@
   "homepage": "https://github.com/AnnetteTumukunde/MyDiary2#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "nodemon": "^1.19.2",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0"
+    "moment": "^2.24.0",
+    "nodemon": "^1.19.2"
+    
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
@@ -37,6 +40,8 @@
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.0",
+    "coveralls": "^3.0.6",
+    "nyc": "^14.1.1"
   }
 }

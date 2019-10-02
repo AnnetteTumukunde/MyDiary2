@@ -35,6 +35,7 @@
         "arrow-parens": "off",
         "prefer-spread": "off",
         "prefer-template": "off",
-        "no-undef": "off"        
+        "no-undef": "off",
+        "radix": "off"       
     }
 }
