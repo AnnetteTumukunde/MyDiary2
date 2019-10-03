@@ -35,7 +35,7 @@ describe('Controller API tests', () => {
             it('Checks the get specific entry API endpoint', finish => {
                 chai
                     .request(app)
-                    .get('/api/v1/entries/Success || /api/v1/entries/Happiness || /api/v1/entries/Worry')
+                    .get('/api/v1/entries/1 || /api/v1/entries/2 || /api/v1/entries/3')
                     .end((error, response) => {
                         expect(response.status).to.equals(200);
                         expect(response.body).to.be.an('object');
@@ -89,7 +89,7 @@ describe('Controller API tests', () => {
         it('Tests if the entry to modify exists', finish => {
             chai
                 .request(app)
-                .put('/api/v1/entries/Success || /api/v1/entries/Happiness || /api/v1/entries/Worry')
+                .put('/api/v1/entries/1 || /api/v1/entries/2 || /api/v1/entries/3')
                 .send({ entry_title: 'Should work', posted: true, viewed: false, entry_content: 'Just the same process followed' })
                 .end((error, response) => {
                     expect(response.status).to.equals(200);
@@ -114,7 +114,7 @@ describe('Controller API tests', () => {
         it('Test if the entry to delete exists', finish => {
             chai
                 .request(app)
-                .delete('/api/v1/entries/Success || /api/v1/entries/Happiness || /api/v1/entries/Worry')
+                .delete('/api/v1/entries/1 || /api/v1/entries/2 || /api/v1/entries/3')
                 .end((error, response) => {
                     expect(response.status).to.equals(200);
                     expect(response.body).to.be.an('object');
