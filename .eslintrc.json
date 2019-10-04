@@ -36,6 +36,7 @@
         "prefer-spread": "off",
         "prefer-template": "off",
         "no-undef": "off",
-        "radix": "off"       
+        "radix": "off",
+        "consistent-return":"off"       
     }
 }
