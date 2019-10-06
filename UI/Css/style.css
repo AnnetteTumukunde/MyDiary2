@@ -379,6 +379,16 @@ color:rgb(234, 243, 234);
     padding: 20px;
     margin: 0px 10px;
 }
+.label {
+    margin: 10px auto;
+    padding: 5px;
+    background-color: rgb(207, 100, 12);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
 .fa-edit {
     color: black;
     margin: 0 auto;
