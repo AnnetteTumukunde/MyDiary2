@@ -1,6 +1,5 @@
 import chai, { expect } from 'chai';
 import chaiHTTP from 'chai-http';
-import moment from 'moment';
 import app from '../index';
 
 chai.use(chaiHTTP);
@@ -56,31 +55,15 @@ describe('Controller API tests', () => {
         });
     });
     describe('Checks the creating API endpoint', () => {
-        it('Checks the create new entry API endpoint', finish => {
+        it('Checks the entry data from user', finish => {
             chai
                 .request(app)
-                .post('/api/v1/newentry')
-                .send({
-                    id: 1,
-                    entryTitle: "something",
-                    entryDate: moment().format('ll'),
-                    posted: false,
-                    viewed: false,
-                    entryContent: "Just write about anything"
-                })
+                .post('/api/v1/entries')
                 .end((error, response) => {
-                    expect(response.status).to.equals(201);
+                    expect(response.status).to.equals(400);
                     expect(response.body).to.be.an('object');
-                    expect(response.body.addedentry).to.be.an('object');
-                    expect(response.body.newentries).to.be.an('number');
-                    expect(response.body.newentry).to.be.an('object');
-                    expect(response.body.newentr).to.be.an('number');
-                    expect(response.body.addedentry.id).to.be.a('number');
-                    expect(response.body.addedentry.entryTitle).to.be.a('string');
-                    expect(response.body.addedentry.entryDate).to.be.a('string');
-                    expect(response.body.addedentry.posted).to.be.a('boolean');
-                    expect(response.body.addedentry.viewed).to.be.a('boolean');
-                    expect(response.body.newentry.entryContent).to.be.a('string');
+                    expect(response.body.status).to.be.a('number');
+                    expect(response.body.error).to.be.a('string');
                     finish();
                 });
         });
@@ -90,10 +73,11 @@ describe('Controller API tests', () => {
             chai
                 .request(app)
                 .put('/api/v1/entries/1 || /api/v1/entries/2 || /api/v1/entries/3')
-                .send({ entry_title: 'Should work', posted: true, viewed: false, entry_content: 'Just the same process followed' })
+                .send({ entryTitle: 'Should work', posted: true, viewed: false, entryContent: 'Just the same process followed' })
                 .end((error, response) => {
                     expect(response.status).to.equals(200);
                     expect(response.body).to.be.an('object');
+                    expect(response.body.message).to.be.a('string');
                     finish();
                 });
         });
