@@ -41,6 +41,10 @@ const modifyentry = (request, response) => {
         return sentry.id === parseInt(request.params.id);
     });
     if (seen) {
+        const { error } = entryValidation.validation(request.body);
+        if (error) {
+            return response.status(400).json({ status: 400, error: error.details[0].message });
+        }
         const editedentries = {
             id: seen.id,
             entryTitle: request.body.entryTitle,
