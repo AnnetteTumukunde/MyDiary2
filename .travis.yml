@@ -5,8 +5,7 @@ before_script:
 - npm install
 script:
 - npm run test
-after script:
+after_script:
 - npm run coverage
 env: 
-- NODE_ENV = "development"
-- NODE_ENV = "production"
+- NODE_ENV = "test"
