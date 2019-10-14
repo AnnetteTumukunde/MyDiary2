@@ -4,9 +4,9 @@
   "description": "This package is for the backend of the online journal called Re_View MyDiary.",
   "main": "index.js",
   "scripts": {
-    "test": "cd Server && nyc --reporter=html --reporter=text mocha --require @babel/register Tests/* --exit || true ",
+    "test": "babel-node ./Server/Config/db.js tableCreation && nyc --reporter=html --reporter=text mocha --require @babel/polyfill --require @babel/register ./Server/Tests/* --timeout 10000 --exit || true ",
     "start": "nodemon --exec babel-node ./Server/index.js",
-    "create": "babel-node ./Server/Config/db tableCreation",
+    "create": "babel-node ./Server/Config/db.js tableCreation",
     "build": "babel Server -d build",
     "clean": "rm -rf build",
     "lint": "eslint ./Server || true",
@@ -23,15 +23,18 @@
   },
   "homepage": "https://github.com/AnnetteTumukunde/MyDiary2#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
     "make-runnable": "^1.3.6",
     "moment": "^2.24.0",
     "nodemon": "^1.19.2",
+    "@babel/polyfill": "^7.6.0",
     "pg": "^7.12.1"
   },
   "devDependencies": {
@@ -40,11 +43,11 @@
     "@babel/node": "^7.6.1",
     "@babel/preset-env": "^7.6.0",
     "@babel/register": "^7.6.0",
+    "coveralls": "^3.0.6",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "mocha": "^6.2.0",
-    "coveralls": "^3.0.6",
     "nyc": "^14.1.1"
   }
 }
