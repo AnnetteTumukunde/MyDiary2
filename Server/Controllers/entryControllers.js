@@ -33,22 +33,27 @@ const retrieveSpecificEntry = async (request, response) => {
     }
 };
 
-const addentry = (request, response) => {
+const addentry = async (request, response) => {
     const { error } = entryValidation.validation(request.body);
     if (error) {
         return response.status(400).json({ status: 400, error: error.details[0].message });
     }
-        const aentryIds = models.length + 1;
-        const nentry = {
-            id: aentryIds,
-            entryTitle: request.body.entryTitle,
-            entryDate: moment().format('ll'),
-            posted: request.body.posted,
-            viewed: request.body.viewed,
-            entryContent: request.body.entryContent,
-        };
-        const newAllEntries = models.push(nentry);
-        response.status(201).json({ status: 201, addedentry: nentry, newentries: newAllEntries });
+    const entryDate = moment().format('ll');
+    const {
+        entryTitle,
+        posted,
+        viewed,
+        entryContent,
+    } = request.body;
+    const query = 'INSERT INTO entries(eTitle,eDate,ePosted,eViewed,eContent) VALUES($1,$2,$3,$4,$5) RETURNING *';
+    const values = [entryTitle, entryDate, posted, viewed, entryContent];
+
+    const result = await pool.query(query, values);
+    return response.status(201).send({
+        status: 201,
+        message: 'Data successfully inserted',
+        data: result.rows[0],
+    });
 };
 
 const modifyentry = (request, response) => {
