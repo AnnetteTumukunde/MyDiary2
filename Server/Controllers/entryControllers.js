@@ -1,6 +1,6 @@
 import moment from 'moment';
 import models from '../Models/data';
-import entryValidation from '../Validation/valid';
+import { entryValidation } from '../Middlewares/valid';
 
 const retrieveAllEntries = (request, response) => {
     response.status(200).json({ data: models });

@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyparser from 'body-parser';
 import allroutes from './Routes/allRoutes';
+import '@babel/polyfill';
 
 const app = express();
 app.use(express.json());

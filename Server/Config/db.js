@@ -14,10 +14,10 @@ const tableCreation = () => {
     const MyDiaryTable = `CREATE TABLE IF NOT EXISTS 
         users(
             uid SERIAL PRIMARY KEY,
-            FirstName VARCHAR(30) NOT NULL,
-            LastName VARCHAR(30) NOT NULL,
-            UserName VARCHAR(100) NOT NULL,
-            password VARCHAR(30) NOT NULL
+            FirstName VARCHAR(40) NOT NULL,
+            LastName VARCHAR(40) NOT NULL,
+            email VARCHAR(100) UNIQUE NOT NULL,
+            password VARCHAR(100) NOT NULL
         )`;
     const MyEntriesTable = `CREATE TABLE IF NOT EXISTS
         entries(
@@ -40,10 +40,9 @@ const tableCreation = () => {
 };
 
 pool.on('remove', () => {
-    console.log('client removed');
-    process.exit(0);
+    console.log('Client removed');
 });
 
-module.exports = { pool, tableCreation };
+export { pool, tableCreation };
 
 require('make-runnable');
