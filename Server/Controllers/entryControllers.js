@@ -13,15 +13,23 @@ const retrieveAllEntries = async (request, response) => {
     });
 };
 
-const retrieveSpecificEntry = (request, response) => {
-    const seen = models.find((sentry) => {
-        return sentry.id === parseInt(request.params.id);
-    });
-    if (seen) {
-        response.status(200).json(seen);
+const retrieveSpecificEntry = async (request, response) => {
+    const id = parseInt(request.params.id);
+    const values = [id];
+    const query = `SELECT * FROM entries WHERE eid = $1`;
+    const view = await pool.query(query, values);
+    if (view.rows < '1') {
+        response.status(404).json({
+            status: 404,
+            message: 'Entry not found'
+        });
     }
     else {
-        response.status(404).json({ message: 'Entry not found', status: 404 });
+        response.status(200).json({
+            status: 200,
+            message: 'That entry exists',
+            entry: view.rows,
+        });
     }
 };
 
