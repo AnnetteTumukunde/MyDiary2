@@ -1,9 +1,16 @@
 import moment from 'moment';
-import models from '../Models/data';
 import { entryValidation } from '../Middlewares/valid';
+import models from '../Models/data';
+import { pool } from '../Config/db';
 
-const retrieveAllEntries = (request, response) => {
-    response.status(200).json({ data: models });
+const retrieveAllEntries = async (request, response) => {
+    const query = 'SELECT * FROM entries';
+    const view = await pool.query(query);
+    return response.status(200).json({
+        status: 200,
+        message: 'Retrieve users successfully',
+        entries: view.rows,
+    });
 };
 
 const retrieveSpecificEntry = (request, response) => {
