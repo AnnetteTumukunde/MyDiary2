@@ -39,6 +39,7 @@
         "radix": "off",
         "consistent-return":"off",
         "newline-per-chained-call": "off",
-        "prefer-promise-reject-errors": "off"       
+        "prefer-promise-reject-errors": "off",
+        "no-unused-expressions": "off"
     }
 }
