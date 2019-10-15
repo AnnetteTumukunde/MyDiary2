@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { entryValidation } from '../Middlewares/valid';
-import models from '../Models/data';
 import { pool } from '../Config/db';
 
 const retrieveAllEntries = async (request, response) => {
@@ -39,12 +38,7 @@ const addentry = async (request, response) => {
         return response.status(400).json({ status: 400, error: error.details[0].message });
     }
     const entryDate = moment().format('ll');
-    const {
-        entryTitle,
-        posted,
-        viewed,
-        entryContent,
-    } = request.body;
+    const { entryTitle, posted, viewed, entryContent } = request.body;
     const query = 'INSERT INTO entries(eTitle,eDate,ePosted,eViewed,eContent) VALUES($1,$2,$3,$4,$5) RETURNING *';
     const values = [entryTitle, entryDate, posted, viewed, entryContent];
 
@@ -56,43 +50,46 @@ const addentry = async (request, response) => {
     });
 };
 
-const modifyentry = (request, response) => {
-    const seen = models.find((sentry) => {
-        return sentry.id === parseInt(request.params.id);
-    });
-    if (seen) {
-        const { error } = entryValidation.validation(request.body);
+const modifyentry = async (request, response) => {
+    const { error } = entryValidation.validation(request.body);
         if (error) {
             return response.status(400).json({ status: 400, error: error.details[0].message });
         }
-        const editedentries = {
-            id: seen.id,
-            entryTitle: request.body.entryTitle,
-            entryDate: seen.entryDate,
-            posted: request.body.posted,
-            viewed: request.body.viewed,
-            entryContent: request.body.entryContent
-        };
-        const changes = models.indexOf(seen);
-        const nentries = models.splice(changes,1,editedentries);
-        response.status(200).json({ message: 'Entry successfully modified', status: 200, nentries });
+    const { entryTitle, posted, viewed, entryContent } = request.body;
+    const query = 'UPDATE entries SET eTitle = $1, ePosted = $2, eViewed = $3, eContent = $4 WHERE eid = $5 RETURNING *';
+    const values = [entryTitle, posted, viewed, entryContent, parseInt(request.params.id)];
+    const edit = await pool.query(query, values);
+    if (!edit.rows[0]) {
+        response.status(404).json({
+            status: 404,
+            message: 'Entry not found'
+        });
     }
     else {
-        response.status(404).json({ message: 'Entry not found', status: 404 });
+        response.status(200).json({
+            status: 200,
+            message: 'Entry updated successfully',
+            entry: edit.rows[0]
+        });
     }
 };
 
-const entrydelete = (request, response) => {
-    const seen = models.find((sentry) => {
-        return sentry.id === parseInt(request.params.id);
-    });
-    if (seen) {
-        const changes = models.indexOf(seen);
-        const newentries = models.splice(changes,1);
-        response.status(200).json({ message: 'Entry deleted', newenntries: newentries });
+const entrydelete = async (request, response) => {
+    const query = 'DELETE FROM entries WHERE eid = $1 RETURNING *';
+    const value = [parseInt(request.params.id)];
+    const del = await pool.query(query, value);
+    if (!del.rows[0]) {
+        response.status(404).json({
+            status: 404,
+            message: 'Entry not found'
+        });
     }
     else {
-        response.status(404).json({ message: 'Entry not found', status: 404 });
+        response.status(200).json({
+            status: 200,
+            message: 'Entry deleted successfully',
+            entry: del.rows
+        });
     }
 };
 
