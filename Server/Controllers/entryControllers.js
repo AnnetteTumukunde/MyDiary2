@@ -7,7 +7,7 @@ const retrieveAllEntries = async (request, response) => {
     const view = await pool.query(query);
     return response.status(200).json({
         status: 200,
-        message: 'Retrieve users successfully',
+        message: 'Successful entries retrieve.',
         entries: view.rows,
     });
 };
@@ -15,18 +15,18 @@ const retrieveAllEntries = async (request, response) => {
 const retrieveSpecificEntry = async (request, response) => {
     const id = parseInt(request.params.id);
     const values = [id];
-    const query = `SELECT * FROM entries WHERE eid = $1`;
+    const query = 'SELECT * FROM entries WHERE eid = $1';
     const view = await pool.query(query, values);
     if (view.rows < '1') {
         response.status(404).json({
             status: 404,
-            message: 'Entry not found'
+            message: 'This entry is not found.'
         });
     }
     else {
         response.status(200).json({
             status: 200,
-            message: 'That entry exists',
+            message: 'This entry exists.',
             entry: view.rows,
         });
     }
@@ -41,12 +41,11 @@ const addentry = async (request, response) => {
     const { entryTitle, posted, viewed, entryContent } = request.body;
     const query = 'INSERT INTO entries(eTitle,eDate,ePosted,eViewed,eContent) VALUES($1,$2,$3,$4,$5) RETURNING *';
     const values = [entryTitle, entryDate, posted, viewed, entryContent];
-
-    const result = await pool.query(query, values);
+    const add = await pool.query(query, values);
     return response.status(201).send({
         status: 201,
-        message: 'Data successfully inserted',
-        data: result.rows[0],
+        message: 'Entry successfully inserted.',
+        entry: add.rows[0],
     });
 };
 
@@ -62,13 +61,13 @@ const modifyentry = async (request, response) => {
     if (!edit.rows[0]) {
         response.status(404).json({
             status: 404,
-            message: 'Entry not found'
+            message: 'This entry is not found.'
         });
     }
     else {
         response.status(200).json({
             status: 200,
-            message: 'Entry updated successfully',
+            message: 'Entry successfully updated.',
             entry: edit.rows[0]
         });
     }
@@ -81,13 +80,13 @@ const entrydelete = async (request, response) => {
     if (!del.rows[0]) {
         response.status(404).json({
             status: 404,
-            message: 'Entry not found'
+            message: 'This entry is not found.'
         });
     }
     else {
         response.status(200).json({
             status: 200,
-            message: 'Entry deleted successfully',
+            message: 'Entry successfully deleted.',
             entry: del.rows
         });
     }
