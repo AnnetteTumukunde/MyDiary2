@@ -22,4 +22,13 @@ const userValidation = {
         return joi.validate(schema, user);
     }
 };
-export { entryValidation, userValidation };
+const signinValidation = {
+    validation(schema) {
+        const signIn = {
+            email: joi.string().required().min(5).max(100).trim(),
+            password: joi.string().required().alphanum().min(8).trim()
+        };
+        return joi.validate(schema, signIn);
+    }
+};
+export { entryValidation, userValidation, signinValidation };
