@@ -11,9 +11,9 @@ app.use('/', allroutes);
 app.use('/api/v1', (request, response) => {
     response.send({ message: 'Server running successfully' });
 });
-const PORT = process.env.PORT || 3201;
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+const port = process.env.PORT;
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
 });
 
 export default app;

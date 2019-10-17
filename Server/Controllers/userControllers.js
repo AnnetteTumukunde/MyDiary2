@@ -31,7 +31,7 @@ const signup = async (request, response) => {
         status: 201,
         message: 'User successfully inserted.',
         token,
-        users: add.rows[0],
+        user: add.rows[0],
     });
 };
 
@@ -63,7 +63,7 @@ const signin = async (request, response) => {
         status: 200,
         message: 'User successfully logged in.',
         token,
-        users: result.rows[0],
+        user: result.rows[0],
     });
 };
 
