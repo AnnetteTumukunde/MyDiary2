@@ -9,3 +9,7 @@ after_script:
 - npm run coverage
 env: 
 - NODE_ENV = "test"
+services:
+  - postgresql
+  before_script:
+  - psql -c 'create database mydiary_db;' -U postgres

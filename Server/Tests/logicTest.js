@@ -39,13 +39,13 @@ describe('Controller API tests', () => {
             it('Checks the get specific entry API endpoint', finish => {
                 chai
                     .request(app)
-                    .get('/api/v1/entries/:id([0-9]+)')
+                    .get('/api/v1/entries/12')
                     .end((error, response) => {
                         expect(response.status).to.equals(200);
                         expect(response.body).to.be.an('object');
                         expect(response.body.message).to.be.a('string');
                         expect(response.body.status).not.to.be.null;
-                        expect(response.body.entry).to.be.an('undefined');
+                        expect(response.body.entry).to.be.an('array');
                         expect(error).to.be.null;
                         finish();
                     });
@@ -109,10 +109,10 @@ describe('Controller API tests', () => {
                 .request(app)
                 .post('/api/v1/auth/signup')
                 .send({
-                    firstname: "gusabisaba",
-                    lastname: "guhora uhindura",
-                    email: "sipora@gmail.com",
-                    password: "changeemail"
+                    firstname: "Claire",
+                    lastname: "Niyonshuti",
+                    email: "claire@gmail.com",
+                    password: "niyonshuti"
                 })
                 .end((error, response) => {
                     expect(response.status).to.equals(201);
@@ -216,19 +216,36 @@ describe('Controller API tests', () => {
                     finish();
                 });
         });
+        it('Checks the invalid user data login from user.', finish => {
+            chai
+                .request(app)
+                .post('/api/v1/auth/signin')
+                .send({
+                    email: 123,
+                    password: "ireneishim"
+                })
+                .end((error, response) => {
+                    expect(response.status).to.equals(400);
+                    expect(response.body).to.be.an('object');
+                    expect(response.body.status).to.be.a('number');
+                    expect(response.body.message).not.to.be.null;
+                    expect(error).to.be.null;
+                    finish();
+                });
+        });
     });
     describe('Checks the modifying the API endpoint', () => {
         it('Tests if the entry to modify exists', finish => {
             chai
                 .request(app)
-                .put('/api/v1/entries/:id([0-9]+)')
+                .put('/api/v1/entries/9')
                 .send({ entryTitle: 'Should work', posted: true, viewed: false, entryContent: 'Just the same process followed' })
                 .end((error, response) => {
                     expect(response.status).to.equals(200);
                     expect(response.body).to.be.an('object');
                     expect(response.body.message).to.be.a('string');
                     expect(response.body.status).not.to.be.null;
-                    expect(response.body.entry).to.be.an('undefined');
+                    expect(response.body.entry).to.be.an('object');
                     expect(error).to.be.null;
                     finish();
                 });
@@ -237,6 +254,20 @@ describe('Controller API tests', () => {
             chai
                 .request(app)
                 .put('/api/v1/entries/1')
+                .send({ entryTitle: 'Should work', posted: true, viewed: false, entryContent: 'Just the same process followed' })
+                .end((error, response) => {
+                    expect(response.status).to.equals(404);
+                    expect(response.body).to.be.an('object');
+                    expect(response.body.status).to.be.a('number');
+                    expect(response.body.message).not.to.be.null;
+                    expect(error).to.be.null;
+                    finish();
+                });
+        });
+        it('Test if the entry to modify exists, but with invalid data', finish => {
+            chai
+                .request(app)
+                .put('/api/v1/entries/8')
                 .end((error, response) => {
                     expect(response.status).to.equals(400);
                     expect(response.body).to.be.an('object');
@@ -251,13 +282,13 @@ describe('Controller API tests', () => {
         it('Test if the entry to delete exists', finish => {
             chai
                 .request(app)
-                .delete('/api/v1/entries/:id([0-9]+)')
+                .delete('/api/v1/entries/3')
                 .end((error, response) => {
                     expect(response.status).to.equals(200);
                     expect(response.body).to.be.an('object');
                     expect(response.body.message).to.be.a('string');
                     expect(response.body.status).not.to.be.null;
-                    expect(response.body.entry).to.be.an('undefined');
+                    expect(response.body.entry).to.be.an('array');
                     expect(error).to.be.null;
                     finish();
                 });
@@ -265,7 +296,7 @@ describe('Controller API tests', () => {
         it('Test if the entry to delete does not exist', finish => {
             chai
                 .request(app)
-                .delete('/api/v1/entries/1')
+                .delete('/api/v1/entries/100')
                 .end((error, response) => {
                     expect(response.status).to.equals(404);
                     expect(response.body).to.be.an('object');
