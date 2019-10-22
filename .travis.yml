@@ -3,9 +3,12 @@ node_js:
 - 10.16.3
 before_script:
 - npm install
+- psql -c "CREATE DATABASE mydiary_db;" -U postgres
 script:
 - npm run test
 after_script:
 - npm run coverage
 env: 
 - NODE_ENV = "test"
+services:
+  - postgresql
