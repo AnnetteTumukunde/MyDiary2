@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { pool } from '../Config/db';
 
 dotenv.config();
 
-const auth = (request, response, next) => {
-    const token = request.headers.authorization;
+const auth = async (request, response, next) => {
+    const token = request.headers['x-access-token'];
     if (!token) {
         return response.status(400).send({
             status: 400,
@@ -13,7 +14,12 @@ const auth = (request, response, next) => {
     }
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        request.user = decoded;
+        const query = 'SELECT * FROM users WHERE uid = $1';
+        const result = await pool.query(query, [decoded.uid]);
+        if (!result.rows[0]) {
+            return response.status(400).send({ message: 'Invalid provided token.' });
+        }
+        request.user = { id: decoded.uid };
         next();
     } 
     catch (exception) {
@@ -23,4 +29,5 @@ const auth = (request, response, next) => {
         });
     }
  };
+ 
  export default auth;

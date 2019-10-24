@@ -11,7 +11,7 @@ pool.on('connect', () => {
     console.log('connected to the Database');
 });
 const tableCreation = () => {
-    const MyDiaryTable = `CREATE TABLE IF NOT EXISTS 
+    const MyDiaryTable = `CREATE TABLE IF NOT EXISTS
         users(
             uid SERIAL PRIMARY KEY,
             FirstName VARCHAR(40) NOT NULL,
@@ -26,7 +26,8 @@ const tableCreation = () => {
             eDate TIMESTAMP NOT NULL,
             ePosted VARCHAR(5) NOT NULL,
             eViewed VARCHAR(5) NOT NULL,
-            eContent VARCHAR(200) NOT NULL
+            eContent VARCHAR(200) NOT NULL,
+            uid SERIAL CONSTRAINT uid REFERENCES users (uid) ON DELETE CASCADE
         )`;
         pool.query(`${MyDiaryTable}; ${MyEntriesTable}`)
             .then((response) => {

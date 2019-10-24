@@ -20,13 +20,12 @@ const signup = async (request, response) => {
         });
     }
     const hashpwd = bcrypt.hashSync(request.body.password.trim(),10);
-    const { firstname, lastname } = request.body;
-    const query = 'INSERT INTO users(FirstName, LastName, email, password) VALUES($1,$2,$3,$4) RETURNING *';
-    const values = [firstname, lastname, emailcheck, hashpwd];
-
+    const { uid, firstname, lastname } = request.body;
+    const query = 'INSERT INTO users(uid, FirstName, LastName, email, password) VALUES($1,$2,$3,$4,$5) RETURNING *';
+    const values = [uid, firstname, lastname, emailcheck, hashpwd];
     const add = await pool.query(query, values);
-    const payload = { firstname, lastname, emailcheck };
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1m' });
+    const payload = { uid, firstname, lastname, emailcheck };
+    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '100d' });
     return response.status(201).json({
         status: 201,
         message: 'User successfully inserted.',
@@ -58,7 +57,7 @@ const signin = async (request, response) => {
     }
     const { uid, FirstName, LastName, email } = result.rows[0];
     const payload = { uid, FirstName, LastName, email };
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1m' });
+    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '100d' });
     return response.status(201).json({
         status: 200,
         message: 'User successfully logged in.',
