@@ -1,8 +1,14 @@
 import chai, { expect } from 'chai';
 import chaiHTTP from 'chai-http';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import app from '../index';
 
+dotenv.config();
 chai.use(chaiHTTP);
+
+const payload = { uid: 3, firstname: "patient", lastname: "resolute", emailCheck: "patient.resolute@gmail.com" };
+const token = jwt.sign(payload, process.env.SECRET_KEY);
 
 describe('Server API test', () => {
     it('Checks the status of the server API', finish => {
@@ -25,6 +31,7 @@ describe('Controller API tests', () => {
             chai
                 .request(app)
                 .get('/api/v1/entries')
+                .set('x-access-token',token)
                 .end((error,response) => {
                     expect(response.status).to.equals(200);
                     expect(response.body).to.be.an('object');
@@ -39,7 +46,8 @@ describe('Controller API tests', () => {
             it('Checks the get specific entry API endpoint', finish => {
                 chai
                     .request(app)
-                    .get('/api/v1/entries/9')
+                    .get('/api/v1/entries/7')
+                    .set('x-access-token',token)
                     .end((error, response) => {
                         expect(response.status).to.equals(200);
                         expect(response.body).to.be.an('object');
@@ -54,6 +62,7 @@ describe('Controller API tests', () => {
                 chai 
                     .request(app)
                     .get('/api/v1/entries/100')
+                    .set('x-access-token',token)
                     .end((error, response) => {
                         expect(response.status).to.equals(404);
                         expect(response.body).to.be.an('object');
@@ -70,11 +79,13 @@ describe('Controller API tests', () => {
             chai
                 .request(app)
                 .post('/api/v1/entries')
+                .set('x-access-token',token)
                 .send({
                     entryTitle: "Something valid",
                     posted: false,
                     viewed: false,
-                    entryContent: "Just write something which is valid, but again not below 20 characters."
+                    entryContent: "Just write something which is valid, but again not below 20 characters.",
+                    author: 3
                 })
                 .end((error, response) => {
                     expect(response.status).to.equals(201);
@@ -89,11 +100,13 @@ describe('Controller API tests', () => {
             chai
                 .request(app)
                 .post('/api/v1/entries')
+                .set('x-access-token',token)
                 .send({
                     entryTitle: "Something valid",
                     posted: false,
                     viewed: false,
-                    entryContent: 34556
+                    entryContent: 34556,
+                    author: 3
                 })
                 .end((error, response) => {
                     expect(response.status).to.equals(400);
@@ -109,10 +122,11 @@ describe('Controller API tests', () => {
                 .request(app)
                 .post('/api/v1/auth/signup')
                 .send({
-                    firstname: "Amata",
-                    lastname: "Uwimpuhwe",
-                    email: "amata.uwimpuhwe@gmail.com",
-                    password: "amatauwimpuhwe"
+                    uid: 6,
+                    firstname: "Thankyou",
+                    lastname: "Lord",
+                    email: "thankyou.lord@gmail.com",
+                    password: "thankyoulord"
                 })
                 .end((error, response) => {
                     expect(response.status).to.equals(201);
@@ -129,6 +143,7 @@ describe('Controller API tests', () => {
                 .request(app)
                 .post('/api/v1/auth/signup')
                 .send({
+                    uid: 1,
                     firstname: "NewIrene",
                     lastname: "Ishimwe",
                     email: "ireneishimwe@gmail.com",
@@ -169,8 +184,8 @@ describe('Controller API tests', () => {
                 .request(app)
                 .post('/api/v1/auth/signin')
                 .send({
-                    email: "ireneishimwe@gmail.com",
-                    password: "ireneishimwe"
+                    email: "patient.resolute@gmail.com",
+                    password: "patientresolute"
                 })
                 .end((error, response) => {
                     expect(response.status).to.equals(201);
@@ -238,8 +253,9 @@ describe('Controller API tests', () => {
         it('Tests if the entry to modify exists', finish => {
             chai
                 .request(app)
-                .put('/api/v1/entries/4')
-                .send({ entryTitle: 'Should work', posted: true, viewed: false, entryContent: 'Just the same process followed' })
+                .put('/api/v1/entries/3')
+                .set('x-access-token',token)
+                .send({ entryTitle: 'Should work', posted: true, viewed: false, entryContent: 'Just the same process followed', author: 3 })
                 .end((error, response) => {
                     expect(response.status).to.equals(200);
                     expect(response.body).to.be.an('object');
@@ -253,8 +269,9 @@ describe('Controller API tests', () => {
         it('Tests if the entry to modify exists, but with invalid data', finish => {
             chai
                 .request(app)
-                .put('/api/v1/entries/6')
-                .send({ entryTitle: 123, posted: true, viewed: false, entryContent: 'Just the same process followed' })
+                .put('/api/v1/entries/3')
+                .set('x-access-token',token)
+                .send({ entryTitle: 123, posted: true, viewed: false, entryContent: 'Just the same process followed', author: 3 })
                 .end((error, response) => {
                     expect(response.status).to.equals(400);
                     expect(response.body).to.be.an('object');
@@ -268,7 +285,8 @@ describe('Controller API tests', () => {
             chai
                 .request(app)
                 .put('/api/v1/entries/100')
-                .send({ entryTitle: 'Should work', posted: true, viewed: false, entryContent: 'Just the same process followed' })
+                .set('x-access-token',token)
+                .send({ entryTitle: 'Should work', posted: true, viewed: false, entryContent: 'Just the same process followed', author: 3 })
                 .end((error, response) => {
                     expect(response.status).to.equals(404);
                     expect(response.body).to.be.an('object');
@@ -283,7 +301,8 @@ describe('Controller API tests', () => {
         it('Test if the entry to delete exists', finish => {
             chai
                 .request(app)
-                .delete('/api/v1/entries/1')
+                .delete('/api/v1/entries/13')
+                .set('x-access-token',token)
                 .end((error, response) => {
                     expect(response.status).to.equals(200);
                     expect(response.body).to.be.an('object');
@@ -298,6 +317,7 @@ describe('Controller API tests', () => {
             chai
                 .request(app)
                 .delete('/api/v1/entries/100')
+                .set('x-access-token',token)
                 .end((error, response) => {
                     expect(response.status).to.equals(404);
                     expect(response.body).to.be.an('object');
