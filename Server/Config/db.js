@@ -24,8 +24,8 @@ const tableCreation = () => {
             eid SERIAL PRIMARY KEY,
             eTitle VARCHAR(50) NOT NULL,
             eDate TIMESTAMP NOT NULL,
-            ePosted VARCHAR(5) NOT NULL,
-            eViewed VARCHAR(5) NOT NULL,
+            ePosted VARCHAR(5),
+            eViewed VARCHAR(5),
             eContent VARCHAR(200) NOT NULL,
             uid SERIAL CONSTRAINT uid REFERENCES users (uid) ON DELETE CASCADE
         )`;

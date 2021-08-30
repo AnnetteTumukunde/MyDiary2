@@ -4,7 +4,7 @@ import allroutes from './Routes/allRoutes';
 import '@babel/polyfill';
 
 const app = express();
-app.use(express.json());
+app.use(express.static('UI'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use('/', allroutes);
